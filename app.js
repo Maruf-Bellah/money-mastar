@@ -1,10 +1,18 @@
+const toggleSpinner = displaySpinner =>{
+     document.getElementById('spinner').style.display = displaySpinner;
+}
+
 const searchButton = () =>{
      const inputText = document.getElementById('searchInput').value;
-   
+     document.getElementById('searchInput').value ='';
+
+     
+
       const url = `https://openapi.programming-hero.com/api/phones?search=${inputText}`
      fetch(url)
      .then(res => res.json())
      .then(data => displayShow(data.data)) 
+     toggleSpinner('block')
 }
 const displayShow = phones => {
      const container = document.getElementById('phone-card');
@@ -23,7 +31,9 @@ const displayShow = phones => {
         </div>
           `
           container.appendChild(div);
+         
      })
+     toggleSpinner('none')
 }
 
 const displayDetails = details =>{
@@ -35,7 +45,7 @@ const displayDetails = details =>{
 
 const displayShowDetails = info =>{
      const information = document.getElementById('information');
-     information.textContent ='';
+     information.innerHTML ='';
      const div = document.createElement('div');
      div.innerHTML=`
      <div id="info" class="card my-5" style="max-width: 1000px;">
@@ -63,7 +73,6 @@ const displayShowDetails = info =>{
         <h6 class="card-title">NFS : ${info.others.NFC} </h6>
         <h6 class="card-title">Radio : ${info.others.Radio}</h6>
         <h6 class="card-title">USB : ${info.others.USB}</h6>
-       
         
       </div>
     </div>

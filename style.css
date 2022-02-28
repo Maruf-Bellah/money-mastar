@@ -18,3 +18,6 @@ spaner{
 #button{
      border-radius: 30px;
 }
+#spinner{
+     display: none;
+}
