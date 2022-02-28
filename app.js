@@ -6,36 +6,60 @@ const searchButton = () =>{
      const inputText = document.getElementById('searchInput').value;
      document.getElementById('searchInput').value ='';
 
-     
+     if(inputText.length == null){
+          error.innerHTML=`<h5>Please Try Again</h5>`
+     }else if(inputText == ''){
+          error.innerHTML=`<h5>Please Try Again</h5>`
+     }
+     else{
+          const url = `https://openapi.programming-hero.com/api/phones?search=${inputText}`
+          fetch(url)
+          .then(res => res.json())
+          .then(data => displayShow(data.data)) 
+          toggleSpinner('block')        
+     }
 
-      const url = `https://openapi.programming-hero.com/api/phones?search=${inputText}`
-     fetch(url)
-     .then(res => res.json())
-     .then(data => displayShow(data.data)) 
-     toggleSpinner('block')
+     
 }
 const displayShow = phones => {
      const container = document.getElementById('phone-card');
      container.textContent = '';
-     phones.forEach(phone => {
-          // console.log(phone);
-          const div = document.createElement('div');
-          div.innerHTML=`
-          <div id="rounded"  class="card h-100 ">
-                <img id="image" src="${phone.image}" class="card-img-top" alt="...">
-          <div class="card-body">
-               <h5 class="card-title">${phone.phone_name}</h5>
-               <h5 class="card-title">${phone.brand}</h5>
-                <button onclick="displayDetails('${phone.slug}')" type="button" class="btn px-4 btn-primary rounded-pill">Detais</button>
-          </div>
-        </div>
-          `
-          container.appendChild(div);
-         
-     })
-     toggleSpinner('none')
-}
 
+          if(phones != ""){
+               error.innerHTML=`<h5>Please Try Again</h5>`
+
+          }else{
+               phones.forEach(phone => {
+                    // console.log(phone);
+                    const div = document.createElement('div');
+                    div.innerHTML=`
+                    <div id="rounded"  class="card h-100 ">
+                          <img id="image" src="${phone.image}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                         <h5 class="card-title">${phone.phone_name}</h5>
+                         <h5 class="card-title">${phone.brand}</h5>
+                          <button onclick="displayDetails('${phone.slug}')" type="button" class="btn px-4 btn-primary rounded-pill">Detais</button>
+                    </div>
+                  </div>
+                    `
+                    container.appendChild(div);
+                   
+               });
+       
+     
+          }
+         
+          toggleSpinner('none')
+     
+
+
+     }
+
+
+
+   
+    
+     
 const displayDetails = details =>{
      const url =`https://openapi.programming-hero.com/api/phone/${details}`
      fetch(url)
@@ -45,6 +69,10 @@ const displayDetails = details =>{
 
 const displayShowDetails = info =>{
      const information = document.getElementById('information');
+     if(!info){
+          error.innerHTML=`<h5>Please Try Again</h5>`
+
+     }
      information.innerHTML ='';
      const div = document.createElement('div');
      div.innerHTML=`
@@ -83,3 +111,4 @@ const displayShowDetails = info =>{
      information.appendChild(div);
    
 }
+
