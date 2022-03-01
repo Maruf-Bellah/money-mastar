@@ -57,10 +57,7 @@ const displayShow = phones => {
           toggleInfo('block')
      }
 
-
-
    
-    
      
 const displayDetails = details =>{
      const url =`https://openapi.programming-hero.com/api/phone/${details}`
@@ -68,6 +65,8 @@ const displayDetails = details =>{
      .then(res => res.json())
      .then(data => displayShowDetails(data.data))
 }
+
+
 
 const displayShowDetails = info =>{
      const information = document.getElementById('information');
