@@ -15,6 +15,7 @@ const searchButton = () =>{
      document.getElementById('searchInput').value ='';
 
      search.style.display="none"
+     
 
           const url = `https://openapi.programming-hero.com/api/phones?search=${inputText}`
           fetch(url)
@@ -28,8 +29,8 @@ const searchButton = () =>{
 }
 const displayShow = phones => {
      const container = document.getElementById('phone-card');
+     console.log(phones);
      container.textContent = '';
-          console.log(phones);
           if(!phones || phones == 0){
           error.innerHTML=`<h5>Please Try Again</h5>`
 
@@ -49,12 +50,8 @@ const displayShow = phones => {
                     `
                     container.appendChild(div);
                     toggleError('none')
-               }
-                     
+               }                    
           }
-
-   
-     
           // display workd
 
           toggleSpinner('none')
@@ -92,7 +89,7 @@ const displayShowDetails = info =>{
       
       
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 ">
       <div id="font" class="card-body">
         <h6 class="card-title">Release : ${info.releaseDate ? info.releaseDate: 'No Relase Date found'}</h6>
         <h6 class="card-title">Chip Set : ${info.mainFeatures.chipSet} </h6>
@@ -106,12 +103,12 @@ const displayShowDetails = info =>{
         <spaner class="card-title text-b fw-bolder">${info.mainFeatures.sensors[4]}, </spaner>
         <spaner class="card-title text-b fw-bolder">${info.mainFeatures.sensors[5] ? info.mainFeatures.sensors[5] : "No Found"} </spaner> <br>
         <b>Others</b>
-        <h6 class="card-title">WLAN : ${info.others.WLAN}</h6>
-        <h6 class="card-title">Bluetooth : ${info.others.Bluetooth}</h6>
-        <h6 class="card-title">GPS : ${info.others.GPS}</h6>
-        <h6 class="card-title">NFS : ${info.others.NFC} </h6>
-        <h6 class="card-title">Radio : ${info.others.Radio}</h6>
-        <h6 class="card-title">USB : ${info.others.USB}</h6>
+         <h6 class="card-title">WLAN : ${info.others?.WLAN  ? info.others?.WLAN : 'No Found'}</h6>
+        <h6 class="card-title">Bluetooth : ${info.others?.Bluetooth ? info.others?.Bluetooth : 'No Found'}</h6>
+        <h6 class="card-title">GPS : ${info.others?.GPS ? info.others?.GPS : 'No Found'}</h6>
+        <h6 class="card-title">NFS : ${info.others?.NFC ? info.others?.NFC : 'No Found'} </h6>
+        <h6 class="card-title">Radio : ${info.others?.Radio ? info.others?.Radio : 'No Found'}</h6>
+        <h6 class="card-title">USB : ${info.others?.USB ? info.others?.USB : 'No Found'}</h6>
         
       </div>
     </div>
