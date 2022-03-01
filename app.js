@@ -29,7 +29,6 @@ const searchButton = () =>{
 }
 const displayShow = phones => {
      const container = document.getElementById('phone-card');
-     console.log(phones);
      container.textContent = '';
           if(!phones || phones == 0){
           error.innerHTML=`<h5>Please Try Again</h5>`
