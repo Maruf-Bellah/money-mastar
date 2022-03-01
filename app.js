@@ -6,48 +6,47 @@ const searchButton = () =>{
      const inputText = document.getElementById('searchInput').value;
      document.getElementById('searchInput').value ='';
 
-     if(inputText.length == null){
+     if(!inputText){
           error.innerHTML=`<h5>Please Try Again</h5>`
-     }else if(inputText == ''){
-          error.innerHTML=`<h5>Please Try Again</h5>`
-     }
-     else{
-          const url = `https://openapi.programming-hero.com/api/phones?search=${inputText}`
+     } 
+     
+     const url = `https://openapi.programming-hero.com/api/phones?search=${inputText.slice(1, 20)}`
           fetch(url)
           .then(res => res.json())
           .then(data => displayShow(data.data)) 
           toggleSpinner('block')        
-     }
+
 
      
 }
 const displayShow = phones => {
      const container = document.getElementById('phone-card');
      container.textContent = '';
+          console.log(phones);
+          if(!phones){
+          error.innerHTML=`<h5>Please Try Again</h5>`
 
-          if(phones != ""){
-               error.innerHTML=`<h5>Please Try Again</h5>`
-
-          }else{
-               phones.forEach(phone => {
-                    // console.log(phone);
-                    const div = document.createElement('div');
-                    div.innerHTML=`
-                    <div id="rounded"  class="card h-100 ">
-                          <img id="image" src="${phone.image}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                         <h5 class="card-title">${phone.phone_name}</h5>
-                         <h5 class="card-title">${phone.brand}</h5>
-                          <button onclick="displayDetails('${phone.slug}')" type="button" class="btn px-4 btn-primary rounded-pill">Detais</button>
-                    </div>
-                  </div>
-                    `
-                    container.appendChild(div);
-                   
-               });
-       
-     
+          }                
+          for(const phone of phones.slice(0, 20)){
+               const div = document.createElement('div');
+               div.innerHTML=`
+               <div id="rounded"  class="card h-100 ">
+                     <img id="image" src="${phone.image}" class="card-img-top" alt="...">
+               <div class="card-body">
+                    <h5 class="card-title">${phone.phone_name}</h5>
+                    <h5 class="card-title">${phone.brand}</h5>
+                     <button onclick="displayDetails('${phone.slug}')" type="button" class="btn px-4 btn-primary rounded-pill">Detais</button>
+               </div>
+             </div>
+               `
+               container.appendChild(div);
           }
+                
+
+                   
+        
+     
+     
          
           toggleSpinner('none')
      
