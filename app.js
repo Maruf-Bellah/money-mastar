@@ -43,7 +43,7 @@ const displayShow = phones => {
                     <div class="card-body">
                          <h5 class="card-title">${phone.phone_name}</h5>
                          <h5 class="card-title">${phone.brand}</h5>
-                          <button onclick="displayDetails('${phone.slug}')" type="button" class="btn px-4 btn-primary rounded-pill">Detais</button>
+                          <button onclick="displayDetails('${phone.slug}')" type="button" class="btn px-4 btn-primary rounded-pill">Details</button>
                     </div>
                   </div>
                     `
